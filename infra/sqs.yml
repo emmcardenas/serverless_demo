@@ -1,0 +1,5 @@
+Resources:
+  ServerlessDemoQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: serverless_queue_${self:custom.stage}

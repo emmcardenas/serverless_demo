@@ -1,0 +1,27 @@
+service: serverless-demo-infra
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${self:custom.stage}
+  #cfnRole: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmAWSCloudFormationExecutionRole # ARN of an IAM role for CloudFormation service. If specified, CloudFormation uses the role's credentials
+
+custom:
+  dynamodb:
+    start:
+      migrate: true
+    stages:
+      - dev
+  stage: dev
+  config:
+    dev:
+      account_id: '476168538798'
+    stg:
+      account_id: '723706874016'
+    prd:
+      account_id: '691789668597' #to be defined
+
+resources:
+- ${file(sqs.yml)}
+#- ${file(dynamo.yml)}
+#- ${file(ec2.yml)}

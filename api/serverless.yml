@@ -1,7 +1,7 @@
 service: serverless-demo
 
-plugins:
-  - serverless-python-requirements
+#plugins:
+#  - serverless-python-requirements
 provider:
   name: aws
   runtime: python3.8
@@ -17,10 +17,11 @@ custom:
       migrate: true
     stages:
       - dev
-  stage: ${opt:env}
+  stage: dev
   config:
     dev:
-      account_id: ''
+      account_id: '476168538798'
+      memory_size: 128
     stg:
       memory_size: 128
       account_id: '723706874016'
@@ -37,6 +38,14 @@ functions:
           path: /ping
           private: false
     timeout: 600
-    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmAWSMasterbuilderLambdaExecutionRole
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaPingExecutionRole
     tags:
       Name: master-builder-ping
+  sqsevent:
+    handler: queue.lambda_handler
+    events:
+      - sqs: arn:aws:sqs:us-east-1:${self:custom.config.${self:custom.stage}.account_id}:serverless_queue_dev
+    timeout: 30
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaPingExecutionRole
+    tags:
+      Name: queue_lambda
