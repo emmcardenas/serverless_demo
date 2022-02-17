@@ -180,18 +180,3 @@ def delete_item(event, context):
         'statusCode' : http_code
     }
     return response
-
-def vulnerable_function(event, context):
-    asin = json.loads(event['body'])['asin']
-    ########OS INJECTION############
-    os.system('git clone ' + asin)
-    body = {
-        'message' : {'error' : 'ASIN does not exist'},
-        'data' : {}
-    }
-    response = {
-        'isBase64Encoded' : False,
-        'body': json.dumps(body),
-        'statusCode' : 200
-    }
-    return response

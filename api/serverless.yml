@@ -1,4 +1,4 @@
-service: serverless-demo
+service: serverless-demo-api
 
 provider:
   name: aws
@@ -22,9 +22,6 @@ custom:
     stg:
       memory_size: 128
       account_id: '723706874016'
-    prd:
-      memory_size: 256
-      account_id: '691789668597' #to be defined
   
 functions:
   ping:
@@ -37,4 +34,4 @@ functions:
     timeout: 600
     role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaPingExecutionRole
     tags:
-      Name: master-builder-ping
+      Name: serverless-demo-ping

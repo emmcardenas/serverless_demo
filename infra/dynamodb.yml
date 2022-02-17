@@ -1,0 +1,16 @@
+Resources:
+  ItemsDynamodDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - 
+          AttributeName: asin
+          AttributeType: S
+      KeySchema: 
+        - 
+          AttributeName: asin
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: demo-serverless-items

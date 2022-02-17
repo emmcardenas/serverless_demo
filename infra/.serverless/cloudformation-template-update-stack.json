@@ -71,10 +71,26 @@
         }
       }
     },
-    "ServerlessDemoQueue": {
-      "Type": "AWS::SQS::Queue",
+    "ItemsDynamodDBTable": {
+      "Type": "AWS::DynamoDB::Table",
       "Properties": {
-        "QueueName": "serverless_queue_dev"
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "asin",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "asin",
+            "KeyType": "HASH"
+          }
+        ],
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        },
+        "TableName": "demo-serverless-items"
       }
     }
   },

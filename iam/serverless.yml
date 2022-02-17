@@ -16,4 +16,4 @@ custom:
 
 resources:
 - ${file(service-roles.yml)}
-#- ${file(service-polices.yml)}
+- ${file(service-policies.yml)}

@@ -83,10 +83,26 @@
               }
             }
           },
-          "ServerlessDemoQueue": {
-            "Type": "AWS::SQS::Queue",
+          "ItemsDynamodDBTable": {
+            "Type": "AWS::DynamoDB::Table",
             "Properties": {
-              "QueueName": "serverless_queue_dev"
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "asin",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "asin",
+                  "KeyType": "HASH"
+                }
+              ],
+              "ProvisionedThroughput": {
+                "ReadCapacityUnits": 1,
+                "WriteCapacityUnits": 1
+              },
+              "TableName": "demo-serverless-items"
             }
           }
         },
@@ -196,13 +212,10 @@
       "stage": "dev",
       "config": {
         "dev": {
-          "account_id": "476168538798"
+          "account_id": "664096853771"
         },
         "stg": {
           "account_id": "723706874016"
-        },
-        "prd": {
-          "account_id": "691789668597"
         }
       }
     },
@@ -210,10 +223,26 @@
     "functions": {},
     "resources": {
       "Resources": {
-        "ServerlessDemoQueue": {
-          "Type": "AWS::SQS::Queue",
+        "ItemsDynamodDBTable": {
+          "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "QueueName": "serverless_queue_dev"
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "asin",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "asin",
+                "KeyType": "HASH"
+              }
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1
+            },
+            "TableName": "demo-serverless-items"
           }
         }
       },
@@ -237,7 +266,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-demo-infra/dev/1644517991604-2022-02-10T18:33:11.604Z",
+    "artifactDirectoryName": "serverless/serverless-demo-infra/dev/1645120329457-2022-02-17T17:52:09.457Z",
     "artifact": ""
   }
 }
