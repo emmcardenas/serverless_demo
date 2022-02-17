@@ -35,3 +35,14 @@ functions:
     role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaPingExecutionRole
     tags:
       Name: serverless-demo-ping
+  getItems:
+    handler: items.get_all_items
+    events:
+      - http:
+          method: GET
+          path: /items
+          private: false
+    timeout: 600
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaItemsExecutionRole
+    tags:
+      Name: serverless-demo-get-items

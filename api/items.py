@@ -4,7 +4,7 @@ import os
 from botocore.exceptions import ClientError
 
 #MODIFY THE TABLE NAME
-TABLE_NAME_LB_ITEMS = ''
+TABLE_NAME_LB_ITEMS = 'demo-serverless-items'
 
 def get_all_items(event, context):
     dynamodb_client = boto3.client('dynamodb')
