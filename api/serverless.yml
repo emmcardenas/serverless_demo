@@ -41,8 +41,52 @@ functions:
       - http:
           method: GET
           path: /items
-          private: false
+          private: true
     timeout: 600
     role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaItemsExecutionRole
     tags:
       Name: serverless-demo-get-items
+  getItem:
+    handler: items.get_item
+    events:
+      - http:
+          method: GET
+          path: /items/{proxy+}
+          private: true
+    timeout: 600
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaItemsExecutionRole
+    tags:
+      Name: serverless-demo-get-item
+  createItem:
+    handler: items.create_item
+    events:
+      - http:
+          method: POST
+          path: /items
+          private: true
+    timeout: 600
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaItemsExecutionRole
+    tags:
+      Name: serverless-demo-create-item
+  updateItem:
+    handler: items.update_item
+    events:
+      - http:
+          method: PUT
+          path: /items
+          private: true
+    timeout: 600
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaItemsExecutionRole
+    tags:
+      Name: serverless-demo-update-item
+  deleteItem:
+    handler: items.delete_item
+    events:
+      - http:
+          method: DELETE
+          path: /items/{proxy+}
+          private: true
+    timeout: 600
+    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaItemsExecutionRole
+    tags:
+      Name: serverless-demo-delete-item
