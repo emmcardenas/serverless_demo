@@ -15,7 +15,7 @@ custom:
   stage: dev
   config:
     dev:
-      account_id: '476168538798'
+      account_id: '664096853771'
     stg:
       account_id: '723706874016'
     prd:

@@ -1,0 +1,19 @@
+service: serverless-demo-iam
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: ${self:custom.stage}
+
+custom:
+  stage: ${opt:stage}
+  config:
+    dev:
+      account_id: '664096853771'
+    stg:
+      account_id: '723706874016'
+
+
+resources:
+- ${file(service-roles.yml)}
+#- ${file(service-polices.yml)}

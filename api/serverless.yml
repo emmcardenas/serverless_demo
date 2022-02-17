@@ -17,7 +17,7 @@ custom:
   stage: ${opt:stage}
   config:
     dev:
-      account_id: '476168538798'
+      account_id: '664096853771'
       memory_size: 128
     stg:
       memory_size: 128
