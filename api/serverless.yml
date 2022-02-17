@@ -1,12 +1,9 @@
 service: serverless-demo
 
-#plugins:
-#  - serverless-python-requirements
 provider:
   name: aws
   runtime: python3.8
   stage: ${self:custom.stage}
-  #cfnRole: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmAWSCloudFormationExecutionRole # ARN of an IAM role for CloudFormation service. If specified, CloudFormation uses the role's credentials
 
 custom:
   pythonRequirements:
@@ -17,7 +14,7 @@ custom:
       migrate: true
     stages:
       - dev
-  stage: dev
+  stage: ${opt:stage}
   config:
     dev:
       account_id: '476168538798'
@@ -41,11 +38,3 @@ functions:
     role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaPingExecutionRole
     tags:
       Name: master-builder-ping
-  sqsevent:
-    handler: queue.lambda_handler
-    events:
-      - sqs: arn:aws:sqs:us-east-1:${self:custom.config.${self:custom.stage}.account_id}:serverless_queue_dev
-    timeout: 30
-    role: arn:aws:iam::${self:custom.config.${self:custom.stage}.account_id}:role/EmmLambdaPingExecutionRole
-    tags:
-      Name: queue_lambda
