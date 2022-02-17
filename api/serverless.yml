@@ -4,16 +4,31 @@ provider:
   name: aws
   runtime: python3.8
   stage: ${self:custom.stage}
+  apiGateway:
+    apiKeys:
+      - free:
+        - ${self:service}-free-key-${self:custom.stage}
+      - paid:
+        - ${self:service}-paid-key-${self:custom.stage}
+    usagePlan:
+      - free:
+          quota:
+            limit: 5000
+            period: MONTH
+            offset: 2
+          throttle:
+            burstLimit: 200
+            rateLimit: 100
+      - paid:
+          quota:
+            limit: 50000
+            period: MONTH
+            offset: 1
+          throttle:
+            burstLimit: 2000
+            rateLimit: 1000
 
 custom:
-  pythonRequirements:
-    dockerizePip: non-linux
-    fileName: requirements.txt
-  dynamodb:
-    start:
-      migrate: true
-    stages:
-      - dev
   stage: ${opt:stage}
   config:
     dev:
